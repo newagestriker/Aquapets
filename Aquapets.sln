@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aquapets.Domain", "Aquapets.Domain\Aquapets.Domain.csproj", "{B80C9677-39B1-4C4C-A120-C634BD601AF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aquapets.Infrastructure", "Aquapets.Infrastructure\Aquapets.Infrastructure.csproj", "{B683F121-EBC0-4879-81D4-F000BEB549BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aquapets.Application", "Aquapets.Application\Aquapets.Application.csproj", "{765371A4-30B0-4400-97D3-F04B788D300C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aquapets.Api", "Aquapets.Api\Aquapets.Api.csproj", "{6B2BA7A2-6CBF-448A-8558-948571E615D9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{D5E095C0-4173-45BC-87F4-F32C2C4E73F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aquapets.Shared.Abstractions", "Aquapets.Shared.Abstractions\Aquapets.Shared.Abstractions.csproj", "{52044446-33DA-435E-9D8E-5519C4999FD0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B80C9677-39B1-4C4C-A120-C634BD601AF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B80C9677-39B1-4C4C-A120-C634BD601AF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B80C9677-39B1-4C4C-A120-C634BD601AF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B80C9677-39B1-4C4C-A120-C634BD601AF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B683F121-EBC0-4879-81D4-F000BEB549BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B683F121-EBC0-4879-81D4-F000BEB549BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B683F121-EBC0-4879-81D4-F000BEB549BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B683F121-EBC0-4879-81D4-F000BEB549BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{765371A4-30B0-4400-97D3-F04B788D300C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{765371A4-30B0-4400-97D3-F04B788D300C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{765371A4-30B0-4400-97D3-F04B788D300C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{765371A4-30B0-4400-97D3-F04B788D300C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B2BA7A2-6CBF-448A-8558-948571E615D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B2BA7A2-6CBF-448A-8558-948571E615D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B2BA7A2-6CBF-448A-8558-948571E615D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B2BA7A2-6CBF-448A-8558-948571E615D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52044446-33DA-435E-9D8E-5519C4999FD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52044446-33DA-435E-9D8E-5519C4999FD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52044446-33DA-435E-9D8E-5519C4999FD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52044446-33DA-435E-9D8E-5519C4999FD0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{52044446-33DA-435E-9D8E-5519C4999FD0} = {D5E095C0-4173-45BC-87F4-F32C2C4E73F6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {435CF7F7-4C99-432D-B574-F5E43AEB5B3A}
+	EndGlobalSection
+EndGlobal
