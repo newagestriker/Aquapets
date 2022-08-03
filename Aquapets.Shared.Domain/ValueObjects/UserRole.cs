@@ -1,6 +1,7 @@
-﻿using Aquapets.Domain.Exceptions;
+﻿
+using Aquapets.Shared.Domain.Exceptions;
 
-namespace Aquapets.Domain.ValueObjects
+namespace Aquapets.Shared.Domain.ValueObjects
 {
     public record UserRole
     {
@@ -10,11 +11,11 @@ namespace Aquapets.Domain.ValueObjects
             {
                 throw new UserRoleEmptyException();
             }
-            if(!Enum.TryParse<Consts.UserRole>(value, true, out role))
+            if (!Enum.TryParse(value, true, out role))
             {
                 throw new UserRoleNotFoundException(value);
             }
-            
+
         }
 
         public Consts.UserRole role;

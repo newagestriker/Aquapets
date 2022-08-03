@@ -1,16 +1,8 @@
-﻿using Aquapets.Domain.Consts;
-using Aquapets.Domain.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Aquapets.Domain.Entity
+﻿namespace Aquapets.Shared.Domain.Entities
 {
     public record User
     {
-        public User( string username, string password)
+        public User(string username, string password)
         {
             Id = new Guid();
             Username = username;

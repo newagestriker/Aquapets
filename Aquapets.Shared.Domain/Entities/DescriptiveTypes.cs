@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aquapets.Domain.Entity
+namespace Aquapets.Shared.Domain.Entities
 {
-    internal class Alarm
+    internal class DescriptiveTypes
     {
     }
 }
