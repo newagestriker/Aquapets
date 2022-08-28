@@ -1,6 +1,8 @@
+using Aquapets.Shared.Api.ActionFilterAttributes;
 using Aquapets.Shared.Api.Middlewares;
 using Aquapets.Shared.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,9 +12,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(
+    o=>o.CustomOperationIds(e=> $"{e.ActionDescriptor.RouteValues["controller"]}_{e.ActionDescriptor.RouteValues["action"]}"));
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddFirebaseSignUp();
+
+builder.Services.AddCors();
+builder.Services.AddScoped<StringifyModelErrorsAttribute>();
 
 builder.Services
        .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -37,6 +43,11 @@ builder.Services
             }
         };
     });
+builder.Services.Configure<ApiBehaviorOptions>(apiBehaviorOptions => {
+    apiBehaviorOptions.SuppressModelStateInvalidFilter = true;
+});
+
+
 
 var app = builder.Build();
 
@@ -48,6 +59,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(x=>x
+.AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin =>  true) // allow any origin
+                .AllowCredentials()); // allow credentials);
 
 app.UseMiddleware<ErrorHandlerMiddleware>();
 

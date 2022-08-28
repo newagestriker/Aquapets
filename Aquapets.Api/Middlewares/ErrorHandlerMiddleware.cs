@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using Aquapets.Shared.Infrastructure.Exceptions;
+using System.Net;
 using System.Text.Json;
 
 namespace Aquapets.Shared.Api.Middlewares
@@ -21,10 +22,22 @@ namespace Aquapets.Shared.Api.Middlewares
             catch (Exception error)
             {
                 var response = context.Response;
+                switch(error)
+                {
+                    case FirebaseLoginException _:
+                    case FirebaseRegisterException _:
+                        response.StatusCode = (int)HttpStatusCode.BadRequest;
+                        break;
+                    default:
+                        response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                        break;
+
+                }
+               
                 response.ContentType = "application/json";
 
                 var result = JsonSerializer.Serialize(new { message = error?.Message });
-                response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                
                 await response.WriteAsync(result);
             }
         }

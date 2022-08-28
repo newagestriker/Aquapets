@@ -1,4 +1,4 @@
-using Aquapets.Shared.Application.Builders;
+using Aquapets.Shared.Api.ReceiveModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,12 +10,16 @@ namespace Aquapets.Shared.Api.Controllers
     public class UserController : ControllerBase
     {
 
-        [HttpPost]
-        public IActionResult Post(string username, string password, string userRole)
+        [HttpGet]
+        public ActionResult<UserIdReceiveModel> Get()
         {
-            UserBuilder userBuilder = new(username, password);
-            var user = userBuilder.setRole(userRole);
-            return Ok(user.Role.ToString());
+            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "user_id");
+            if(userIdClaim != null )
+            {
+                return Ok(new UserIdReceiveModel(userIdClaim.Value));
+            }
+            return BadRequest();
+          
         }
     }
 }

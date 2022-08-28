@@ -1,5 +1,6 @@
 ﻿using Aquapets.Shared.Application.Services;
 using Aquapets.Shared.Infrastructure.Services;
+using Firebase.Auth;
 using Microsoft.Extensions.DependencyInjection;
 
 
@@ -9,8 +10,8 @@ namespace Aquapets.Shared.Infrastructure
     {
         public static IServiceCollection AddFirebaseSignUp(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddScoped<ISignUpService<string,string>, SignUpService>();
-            serviceCollection.AddScoped<ILoginService<string,string>, LoginService>();
+      
+            serviceCollection.AddScoped<IAuthenticationService<string, FirebaseAuthLink, string, FirebaseAuthLink,string>, AuthenticationService>();
             return serviceCollection;
 
         }
