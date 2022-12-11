@@ -7,19 +7,25 @@ using Aquapets.Shared.Infrastructure.Models;
 using Firebase.Auth;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Aquapets.Shared.Infrastructure.Services
 {
-    public class AuthenticationService : IAuthenticationService<string, FirebaseAuthLink, string, FirebaseAuthLink, string>
+    public class AuthenticationService : IAuthenticationService<FirebaseAuthLink, string, FirebaseAuthLink, string>
+
+
     {
-        public async Task<FirebaseAuthLink> Login(LoginDto loginDto, string config)
+        private readonly string config;
+        private readonly HttpContext httpContext;
+
+        public AuthenticationService(string config, HttpContext httpContext)
         {
-            FirebaseAuthProvider auth = new FirebaseAuthProvider(new FirebaseConfig(config));
+            this.config = config;
+            this.httpContext = httpContext;
+        }
+        public async Task<FirebaseAuthLink> Login(LoginDto loginDto)
+        {
+            FirebaseAuthProvider auth = new(new FirebaseConfig(config));
 
             try
             {
@@ -47,7 +53,7 @@ namespace Aquapets.Shared.Infrastructure.Services
             }
         }
 
-        public async Task<string> Logout(HttpContext httpContext)
+        public async Task<string> Logout()
         {
             if (httpContext.Request.Cookies[ApiConstants.JwtAuthCookieName] == null)
             {
@@ -64,9 +70,9 @@ namespace Aquapets.Shared.Infrastructure.Services
             }
         }
 
-        public async Task<string> ResetPassword(string email, string config)
+        public async Task<string> ResetPassword(string email)
         {
-            FirebaseAuthProvider auth = new FirebaseAuthProvider(new FirebaseConfig(config));
+            FirebaseAuthProvider auth = new(new FirebaseConfig(config));
             try
             {
                 await auth.SendPasswordResetEmailAsync(email);
@@ -81,9 +87,9 @@ namespace Aquapets.Shared.Infrastructure.Services
             }
         }
 
-        public async Task<FirebaseAuthLink> SignUp(SignUpDto signUpDto, string config)
+        public async Task<FirebaseAuthLink> SignUp(SignUpDto signUpDto)
         {
-            FirebaseAuthProvider auth = new FirebaseAuthProvider(new FirebaseConfig(config));
+            FirebaseAuthProvider auth = new(new FirebaseConfig(config));
 
             try
             {
@@ -106,6 +112,7 @@ namespace Aquapets.Shared.Infrastructure.Services
                 throw new UnknownErrorException();
             }
         }
+        
     }
     
 }

@@ -15,9 +15,9 @@ namespace Aquapets.Shared.Api.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly IConfiguration configuration;
-        private readonly IAuthenticationService<string, FirebaseAuthLink, string, FirebaseAuthLink,string> authenticationService;
+        private readonly IAuthenticationService< FirebaseAuthLink, string, FirebaseAuthLink,string> authenticationService;
 
-        public AuthenticationController(IConfiguration configuration, IAuthenticationService<string, FirebaseAuthLink, string, FirebaseAuthLink,string> authenticationService)
+        public AuthenticationController(IConfiguration configuration, IAuthenticationService< FirebaseAuthLink, string, FirebaseAuthLink,string> authenticationService)
         {
             this.configuration = configuration;
             this.authenticationService = authenticationService;
@@ -27,7 +27,7 @@ namespace Aquapets.Shared.Api.Controllers
         public async Task<ActionResult<User>> SignUp([FromBody] SignUpDto signUpDto)
         {
            
-                var firebaseAuthLink = await authenticationService.SignUp(signUpDto, configuration["FirebaseApiKEY"]);
+                var firebaseAuthLink = await authenticationService.SignUp(signUpDto);
                 Response.Cookies.Append("X-Access-Token", firebaseAuthLink.FirebaseToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.None, Secure = true });
 
                 return Ok(firebaseAuthLink.User);  
@@ -38,7 +38,7 @@ namespace Aquapets.Shared.Api.Controllers
         public async Task<ActionResult<User>> Login([FromBody] LoginDto loginDto)
         {
 
-            var firebaseAuthLink = await authenticationService.Login(loginDto, configuration["FirebaseApiKEY"]);
+            var firebaseAuthLink = await authenticationService.Login(loginDto);
 
             Response.Cookies.Append("X-Access-Token", firebaseAuthLink.FirebaseToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.None, Secure = true });
 
@@ -51,7 +51,7 @@ namespace Aquapets.Shared.Api.Controllers
         public async Task<ActionResult<PasswordResetEmailConfirmationReceiveModel>> ResetPassword([Required,FromBody] string email)
         {
 
-            string confirmation =  await authenticationService.ResetPassword(email, configuration["FirebaseApiKEY"]);
+            string confirmation =  await authenticationService.ResetPassword(email);
 
 
             return Ok(new PasswordResetEmailConfirmationReceiveModel(confirmation));
@@ -62,7 +62,7 @@ namespace Aquapets.Shared.Api.Controllers
         public async Task<ActionResult<LogoutReceiveModel>> Logout()
         {
 
-            var message = await authenticationService.Logout(HttpContext);
+            var message = await authenticationService.Logout();
            
 
             return Ok(new LogoutReceiveModel(message));
