@@ -15,7 +15,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(
     o=>o.CustomOperationIds(e=> $"{e.ActionDescriptor.RouteValues["controller"]}_{e.ActionDescriptor.RouteValues["action"]}"));
 builder.Services.AddDistributedMemoryCache();
-builder.Services.AddFirebaseSignUp();
+builder.Services.AddInfrastructure();
+
 
 builder.Services.AddCors();
 builder.Services.AddScoped<StringifyModelErrorsAttribute>();
