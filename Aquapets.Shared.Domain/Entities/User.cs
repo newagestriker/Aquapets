@@ -16,6 +16,5 @@
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public ValueObjects.UserRole? Role { get; set; }
-
     }
 }

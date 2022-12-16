@@ -18,6 +18,8 @@ namespace Aquapets.Shared.Domain.ValueObjects
 
         }
 
+        public UserRole() {}
+
         public Consts.UserRole role;
 
         public static implicit operator string(UserRole userRole) => userRole.ToString();

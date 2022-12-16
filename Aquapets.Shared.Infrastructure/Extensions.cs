@@ -27,7 +27,7 @@ namespace Aquapets.Shared.Infrastructure
             });
 
             var configuration = serviceCollection.BuildServiceProvider().GetService<IConfiguration>();
-            serviceCollection.AddDbContext<UserDbContext>(options => options.UseMySql(ServerVersion.AutoDetect(configuration.GetConnectionString("AquaPetsDatabase"))));
+            serviceCollection.AddDbContext<UserDbContext>(options => options.UseMySql(configuration.GetConnectionString("AquaPetsDatabase"), ServerVersion.AutoDetect(configuration.GetConnectionString("AquaPetsDatabase"))));
 
             serviceCollection.AddScoped<IUserRepository, UserRepository>();
             return serviceCollection;
