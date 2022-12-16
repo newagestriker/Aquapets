@@ -1,11 +1,7 @@
 ﻿using Aquapets.Shared.Abstractions.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Aquapets.Shared.Infrastructure.Exceptions
+
+namespace Aquapets.Shared.Application.Exceptions
 {
     public abstract class ServiceException : AquapetsException
     {

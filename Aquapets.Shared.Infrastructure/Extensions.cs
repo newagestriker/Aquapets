@@ -14,11 +14,11 @@ namespace Aquapets.Shared.Infrastructure
         {
 
             serviceCollection.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            serviceCollection.AddScoped<IAuthenticationService<FirebaseAuthLink, string, FirebaseAuthLink,string>, AuthenticationService>(sp =>
+            serviceCollection.AddScoped<IAuthenticationService<FirebaseAuthLink, string, FirebaseAuthLink,string>, FirebaseAuthenticationService>(sp =>
             {
                 var configuration = sp.GetRequiredService<IConfiguration>();
                 var httpContextAccessor = sp.GetRequiredService<IHttpContextAccessor>();
-                return new AuthenticationService(configuration["FirebaseApiKEY"]!, httpContextAccessor.HttpContext);
+                return new FirebaseAuthenticationService(configuration["FirebaseApiKEY"]!, httpContextAccessor.HttpContext);
             });
             return serviceCollection;
 

@@ -11,14 +11,14 @@ using Newtonsoft.Json;
 
 namespace Aquapets.Shared.Infrastructure.Services
 {
-    public class AuthenticationService : IAuthenticationService<FirebaseAuthLink, string, FirebaseAuthLink, string>
+    public class FirebaseAuthenticationService : IAuthenticationService<FirebaseAuthLink, string, FirebaseAuthLink, string>
 
 
     {
         private readonly string config;
         private readonly HttpContext httpContext;
 
-        public AuthenticationService(string config, HttpContext httpContext)
+        public FirebaseAuthenticationService(string config, HttpContext httpContext)
         {
             this.config = config;
             this.httpContext = httpContext;
