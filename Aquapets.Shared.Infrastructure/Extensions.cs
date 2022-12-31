@@ -9,13 +9,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using System.ComponentModel.DataAnnotations;
 
 namespace Aquapets.Shared.Infrastructure
 {
     public static class Extensions
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection serviceCollection)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection serviceCollection, IConfiguration configuration)
         {
 
             serviceCollection.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -26,7 +25,6 @@ namespace Aquapets.Shared.Infrastructure
                 return new FirebaseAuthenticationService(configuration["FirebaseApiKEY"]!, httpContextAccessor.HttpContext);
             });
 
-            var configuration = serviceCollection.BuildServiceProvider().GetService<IConfiguration>();
             serviceCollection.AddDbContext<UserDbContext>(options => options.UseMySql(configuration.GetConnectionString("AquaPetsDatabase"), ServerVersion.AutoDetect(configuration.GetConnectionString("AquaPetsDatabase"))));
 
             serviceCollection.AddScoped<IUserRepository, UserRepository>();

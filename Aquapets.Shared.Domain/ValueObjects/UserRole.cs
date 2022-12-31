@@ -18,7 +18,7 @@ namespace Aquapets.Shared.Domain.ValueObjects
 
         }
 
-        public UserRole() {}
+        private UserRole() {}
 
         public Consts.UserRole role;
 

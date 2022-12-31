@@ -1,10 +1,11 @@
-﻿using Aquapets.Shared.Domain.Entities;
+﻿using Aquapets.Shared.Domain.Consts;
+using Aquapets.Shared.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Aquapets.Shared.Infrastructure.DbContexts
 {
-    public class UserDbContext : DbContext
+    public sealed class UserDbContext : DbContext
     {
 
         public UserDbContext(DbContextOptions options):base(options) { }
@@ -13,17 +14,20 @@ namespace Aquapets.Shared.Infrastructure.DbContexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasDefaultSchema("User");
             modelBuilder.ApplyConfiguration(new UserEntityTypeConfiguration());
+            base.OnModelCreating(modelBuilder);
         }
 
     }
     
     public class UserEntityTypeConfiguration: IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<User> orderConfiguration)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
-           
-            orderConfiguration.OwnsOne(o => o.Role).Property(r => r.role).HasColumnName("UserRole");
+
+            builder.Property(u => u.Role).HasConversion(l => l!.ToString(), l => new Domain.ValueObjects.UserRole(l))
+                .HasColumnName("Role");
        
         }
     }
